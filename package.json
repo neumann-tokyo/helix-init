@@ -2,6 +2,9 @@
   "name": "helix-sample",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "dev": "shadow-cljs watch app"
+  },
   "devDependencies": {
     "shadow-cljs": "2.20.20",
     "tailwindcss": "^3.1.2"

@@ -4,20 +4,22 @@
 
  :builds
  {:app
-  {;; ...
-   :target :browser
-   :output-dir "public/js"
-   :asset-path "/js"
+  {:target :browser
+   :output-dir "resources/public/js/compiled"
+   :asset-path "/js/compiled"
    :modules
    {:main
     {:init-fn helix-sample.app/init}}
    :dev
    {:build-hooks
-    [(teknql.tailwind/start-watch!)]}}
-  :release
-  {:build-hooks
-   [(teknql.tailwind/compile-release!)]}
-  :devtools
-  {:http-root   "resources/public/" ;; Must be set to infer default purge targets.
-   :http-port   3000}
-  :tailwind/output "resources/public/css/site.css"}}
+    [(teknql.tailwind/start-watch!)]}
+   :release
+   {:build-hooks
+    [(teknql.tailwind/compile-release!)]
+    :compiler-options
+    {:trusted-strings true}}
+   :devtools
+   {:http-root   "resources/public/" ;; Must be set to infer default purge targets.
+    :http-port   3000}
+   :tailwind/files {:base-path "."}
+   :tailwind/output "resources/public/css/site.css"}}}
