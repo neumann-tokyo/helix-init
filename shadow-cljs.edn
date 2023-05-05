@@ -9,7 +9,7 @@
    :asset-path "/js/compiled"
    :modules
    {:main
-    {:init-fn helix-sample.app/init}}
+    {:init-fn helix-init.app/init}}
    :dev
    {:build-hooks
     [(teknql.tailwind/start-watch!)]}

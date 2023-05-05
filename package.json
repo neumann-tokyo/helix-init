@@ -1,7 +1,11 @@
 {
-  "name": "helix-sample",
+  "name": "helix-init",
   "version": "0.0.1",
   "private": true,
+  "engines": {
+    "node": ">= 19.0.0",
+    "npm": ">= 9.0.0"
+  },
   "scripts": {
     "dev": "shadow-cljs watch app"
   },
