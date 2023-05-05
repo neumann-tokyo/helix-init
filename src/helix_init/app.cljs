@@ -14,7 +14,7 @@
 (defnc app []
   (let [[state set-state] (hooks/use-state {:name "Helix User"})]
     (d/div
-     (d/h1 "Welcome!")
+     (d/h1 {:class-name "text-4xl"} "Welcome!")
       ;; create elements out of components
      ($ greeting {:name (:name state)})
      (d/input {:value (:name state)
