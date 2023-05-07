@@ -1,6 +1,7 @@
 node_modules/
 public/js
 /resources/public/js/compiled/
+/resources/public/css/
 
 /target
 /checkouts
