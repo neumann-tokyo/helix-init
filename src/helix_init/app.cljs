@@ -1,33 +1,18 @@
 (ns helix-init.app
   (:require [helix.core :refer [defnc $]]
-            [helix.dom :as d]
             ["react" :as r]
             ["react-dom/client" :as rdom]
-            ["react-router-dom" :as rrd]))
-
-(defnc home-page []
-  (d/div
-   (d/h1 {:class-name "text-4xl"} "Home")))
-
-(defnc about-page []
-  (d/div
-   (d/h1 {:class-name "text-4xl"} "About")))
-
-(defnc layout []
-  (d/div
-   (d/ul
-    (d/li
-     ($ rrd/Link {:to "/"} "Home"))
-    (d/li
-     ($ rrd/Link {:to "/about"} "About")))
-   (d/div ($ rrd/Outlet))))
+            ["react-router-dom" :as rrd]
+            [helix-init.layouts.base :as base]
+            [helix-init.pages.sign-in :as sign-in]
+            [helix-init.pages.about :as about]))
 
 (defnc app []
   ($ rrd/BrowserRouter
      ($ rrd/Routes
-        ($ rrd/Route {:path "/" :element ($ layout)}
-           ($ rrd/Route {:index true :element ($ home-page)})
-           ($ rrd/Route {:path "about" :element ($ about-page)})))))
+        ($ rrd/Route {:path "/" :element ($ base/layout)}
+           ($ rrd/Route {:index true :element ($ sign-in/sign-in-page)})
+           ($ rrd/Route {:path "about" :element ($ about/about-page)})))))
 
 (defonce root (rdom/createRoot (js/document.getElementById "app")))
 (defn ^:export init []
