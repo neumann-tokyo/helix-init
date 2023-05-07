@@ -1,6 +1,11 @@
 ;; shadow-cljs configuration
-{:deps
- {:aliases [:cljs]}
+{:source-paths
+ ["src"]
+
+ :dependencies
+ [[lilactown/helix "0.1.9"]
+  [metosin/malli "0.10.0"]
+  [com.teknql/shadow-cljs-tailwind-jit "1.0.0"]]
 
  :builds
  {:app
