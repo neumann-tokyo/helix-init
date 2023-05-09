@@ -11,7 +11,7 @@ refer
 - [x] react-router-dom
 - [ ] jotai
 - [ ] react-query
-- [ ] react-hook-form
+- [x] react-hook-form
 
 ## development
 
