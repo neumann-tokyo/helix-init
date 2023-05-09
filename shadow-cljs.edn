@@ -5,6 +5,7 @@
  :dependencies
  [[lilactown/helix "0.1.9"]
   [metosin/malli "0.10.0"]
+  [camel-snake-kebab "0.4.3"]
   [com.teknql/shadow-cljs-tailwind-jit "1.0.0"]]
 
  :builds
