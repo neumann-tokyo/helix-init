@@ -1,21 +1,23 @@
 (ns helix-init.pages.sign-in
   (:require [helix.core :refer [defnc]]
             [helix.dom :as d]
+            [helix.hooks :as hooks]
             ["react-hook-form" :refer [useForm]]))
 
-(defn on-submit [data]
-  (js/console.log data))
-
 ;; https://github.com/dvingo/malli-react-hook-form
-;; const { register, handleSubmit, watch, formState: { errors } } = useForm();
 (defnc sign-in-page []
   (let [form (useForm)
         register (.-register form)
         handleSubmit (.-handleSubmit form)
         errors (-> form .-formState .-errors)
         register-email (register "email" #js {:required true})
-        register-password (register "password" #js {:required true})]
-    (print errors)
+        register-password (register "password" #js {:required true})
+        [api-errors set-api-errors] (hooks/use-state nil)
+        on-submit (fn [data]
+                    (if (and (= (.-email data) "user1@example.com")
+                             (= (.-password data) "password"))
+                      (js/console.log data)
+                      (set-api-errors ["Invalid email or password."])))]
     (d/div
      (d/h1 {:class-name "text-4xl"} "Sign In")
      (d/form
@@ -49,6 +51,8 @@
          :ref (.-ref register-password)})
        (when (.-password errors)
          (d/span {:class-name "text-red-500"} "This field is required")))
+      (map-indexed (fn [index error]
+                     (d/div {:class-name "text-red-500" :key index} error)) api-errors)
       (d/button
        {:type "submit"
         :class-name "bg-blue-500 text-white rounded-md p-2"}
