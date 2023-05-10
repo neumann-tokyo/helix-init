@@ -9,7 +9,7 @@ refer
 - [x] Tailwind.css
 - [x] helix
 - [x] react-router-dom
-- [ ] jotai
+- [x] jotai
 - [ ] react-query
 - [x] react-hook-form
 

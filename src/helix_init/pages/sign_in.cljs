@@ -2,7 +2,10 @@
   (:require [helix.core :refer [defnc]]
             [helix.dom :as d]
             [helix.hooks :as hooks]
-            ["react-hook-form" :refer [useForm]]))
+            ["react-hook-form" :refer [useForm]]
+            ["jotai" :refer [useAtom]]
+            ["js-cookie" :as Cookies]
+            [helix-init.atoms :refer [sign-in-token-atom]]))
 
 ;; https://github.com/dvingo/malli-react-hook-form
 (defnc sign-in-page []
@@ -13,10 +16,12 @@
         register-email (register "email" #js {:required true})
         register-password (register "password" #js {:required true})
         [api-errors set-api-errors] (hooks/use-state nil)
+        [_sign-in-token set-sign-in-token] (useAtom sign-in-token-atom)
         on-submit (fn [data]
                     (if (and (= (.-email data) "user1@example.com")
                              (= (.-password data) "password"))
-                      (js/console.log data)
+                      (do (set-sign-in-token (fn [_token] "sign-in-token"))
+                          (.set Cookies "sign-in-token" "sign-in-token"))
                       (set-api-errors ["Invalid email or password."])))]
     (d/div
      (d/h1 {:class-name "text-4xl"} "Sign In")
