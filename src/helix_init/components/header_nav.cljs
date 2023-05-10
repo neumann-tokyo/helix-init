@@ -9,4 +9,4 @@
    (d/li
     ($ rrd/Link {:to "/"} "Home"))
    (d/li
-    ($ rrd/Link {:to "/about"} "About"))))
+    ($ rrd/Link {:to "/sign-up"} "Sign Up"))))
