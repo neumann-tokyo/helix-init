@@ -1,5 +1,5 @@
 (ns helix-init.components.header-nav
-  (:require [helix.core :refer [defnc $ <>]]
+  (:require [helix.core :refer [defnc $]]
             [helix.dom :as d]
             ["react-router-dom" :as rrd]
             ["jotai" :refer [useAtom]]
