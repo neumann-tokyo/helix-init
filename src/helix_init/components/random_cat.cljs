@@ -6,6 +6,7 @@
             ["jotai" :as jotai]
             ["jotai/utils" :as jotai-utils]))
 
+;; TODO cljs-http 用の loadable を自作する
 (defonce random-cat-api-atom
   (jotai/atom
    (go (fn [_get] (<! (http/get "https://cataas.com/cat"
