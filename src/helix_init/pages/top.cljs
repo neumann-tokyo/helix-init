@@ -3,7 +3,6 @@
             [helix.dom :as d]
             [helix-init.components.random-cat :refer [random-cat]]))
 
-;; TODO https://cataas.com/#/ から画像を取得して表示する
 (defnc top-page []
   (d/div
    (d/h1 {:class-name "text-4xl"} "Signed in Top")
