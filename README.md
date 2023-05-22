@@ -10,6 +10,7 @@ refer
 - [x] helix
 - [x] react-router-dom
 - [x] jotai
+- [x] axios
 - [x] react-hook-form
 
 ## development
