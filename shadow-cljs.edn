@@ -1,6 +1,6 @@
 ;; shadow-cljs configuration
 {:source-paths
- ["src"]
+ ["src" "test"]
 
  :dependencies
  [[lilactown/helix "0.1.9"]
@@ -29,4 +29,11 @@
    {:http-root   "resources/public/" ;; Must be set to infer default purge targets.
     :http-port   3000}
    :tailwind/files {:base-path "."}
-   :tailwind/output "resources/public/css/site.css"}}}
+   :tailwind/output "resources/public/css/site.css"}
+
+  :test
+  {:target    :node-test
+   :main     helix-init.test-runner/test-runner
+   :output-to "out/node-tests.js"
+   :ns-regexp "-test$"
+   :autorun   true}}}
