@@ -33,6 +33,7 @@
 
   :test
   {:target    :node-test
+   :main     helix-init.test-runner/test-runner
    :output-to "out/node-tests.js"
    :ns-regexp "-test$"
    :autorun   true}}}
