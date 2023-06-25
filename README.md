@@ -5,7 +5,7 @@ I used regular React libraries not ClojureScript culture's one.
 
 ## libraries
 
-- [x] Tailwind.css
+- [x] Chakra UI
 - [x] helix
 - [x] react-router-dom
 - [x] jotai
