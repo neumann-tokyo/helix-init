@@ -16,19 +16,9 @@
    :modules
    {:main
     {:init-fn helix-init.app/init}}
-   :dev
-   {:build-hooks
-    [(teknql.tailwind/start-watch!)]}
-   :release
-   {:build-hooks
-    [(teknql.tailwind/compile-release!)]
-    :compiler-options
-    {:trusted-strings true}}
    :devtools
    {:http-root   "resources/public/" ;; Must be set to infer default purge targets.
-    :http-port   3000}
-   :tailwind/files {:base-path "."}
-   :tailwind/output "resources/public/css/site.css"}
+    :http-port   3000}}
 
   :test
   {:target    :node-test
