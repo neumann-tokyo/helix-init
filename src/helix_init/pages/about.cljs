@@ -1,7 +1,8 @@
 (ns helix-init.pages.about
-  (:require [helix.core :refer [defnc]]
-            [helix.dom :as d]))
+  (:require [helix.core :refer [defnc $]]
+            [helix.dom :as d]
+            ["@chakra-ui/react" :refer [Heading]]))
 
 (defnc about-page []
   (d/div
-   (d/h1 {:class-name "text-4xl"} "About")))
+   ($ Heading {:as "h1" :size "4xl"} "About")))

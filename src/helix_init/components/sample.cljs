@@ -1,7 +1,7 @@
 (ns helix-init.components.sample
-  (:require [helix.core :refer [defnc]]
-            [helix.dom :as d]))
+  (:require [helix.core :refer [defnc $]]
+            ["@chakra-ui/react" :refer [Text]]))
 
 (defnc sample []
-  (d/div "This is a sample component."))
+  ($ Text "This is a sample component."))
 

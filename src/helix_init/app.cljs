@@ -3,6 +3,7 @@
             ["react" :as r]
             ["react-dom/client" :as rdom]
             ["react-router-dom" :as rrd]
+            ["@chakra-ui/react" :refer [ChakraProvider]]
             ["jotai" :refer [useAtom]]
             [helix-init.layouts.base :as base]
             [helix-init.pages.sign-in :as sign-in]
@@ -14,14 +15,15 @@
 
 (defnc app []
   (let [[sign-in-token _] (useAtom sign-in-token-atom)]
-    ($ rrd/BrowserRouter
-       ($ rrd/Routes
-          ($ rrd/Route {:path "/" :element ($ base/layout)}
-             ($ rrd/Route {:index true :element (if sign-in-token
-                                                  ($ require-auth top/top-page)
-                                                  ($ sign-in/sign-in-page))})
-             ($ rrd/Route {:path "sign-up" :element ($ sign-up/sign-up-page)})
-             ($ rrd/Route {:path "about" :element ($ require-auth about/about-page)}))))))
+    ($ ChakraProvider
+       ($ rrd/BrowserRouter
+          ($ rrd/Routes
+             ($ rrd/Route {:path "/" :element ($ base/layout)}
+                ($ rrd/Route {:index true :element (if sign-in-token
+                                                     ($ require-auth top/top-page)
+                                                     ($ sign-in/sign-in-page))})
+                ($ rrd/Route {:path "sign-up" :element ($ sign-up/sign-up-page)})
+                ($ rrd/Route {:path "about" :element ($ require-auth about/about-page)})))))))
 
 (defonce root (rdom/createRoot (js/document.getElementById "app")))
 (defn ^:export init []
