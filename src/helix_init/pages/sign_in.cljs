@@ -1,7 +1,8 @@
 (ns helix-init.pages.sign-in
-  (:require [helix.core :refer [defnc]]
+  (:require [helix.core :refer [defnc $]]
             [helix.dom :as d]
             [helix.hooks :as hooks]
+            ["@chakra-ui/react" :refer [FormControl FormLabel FormErrorMessage Input Button]]
             ["react-hook-form" :refer [useForm]]
             ["jotai" :refer [useAtom]]
             ["js-cookie" :as Cookies]
@@ -13,6 +14,7 @@
         register (.-register form)
         handleSubmit (.-handleSubmit form)
         errors (-> form .-formState .-errors)
+        is-submitting (-> form .-formState .-isSubmitting)
         register-email (register "email" #js {:required true})
         register-password (register "password" #js {:required true})
         [api-errors set-api-errors] (hooks/use-state nil)
@@ -23,42 +25,33 @@
                       (do (set-sign-in-token (fn [_token] "sign-in-token"))
                           (.set Cookies "sign-in-token" "sign-in-token"))
                       (set-api-errors ["Invalid email or password."])))]
-    (d/div
-     (d/h1 {:class-name "text-4xl"} "Sign In")
-     (d/form
-      {:class-name "flex flex-col gap-4 w-96 mt-4"
-       :on-submit (handleSubmit on-submit)}
-      (d/div
-       {:class-name "flex flex-col gap-2"}
-       (d/label {:for "email"} "Email")
-       (d/input
-        {:type "email"
-         :id "email"
-         :class-name "border border-gray-300 rounded-md p-2"
-         :placeholder "Email"
-         :name (.-name register-email)
-         :on-blur (.-onBlur register-email)
-         :on-change (.-onChange register-email)
-         :ref (.-ref register-email)})
-       (when (.-email errors)
-         (d/span {:class-name "text-red-500"} "This field is required")))
-      (d/div
-       {:class-name "flex flex-col gap-2"}
-       (d/label {:for "password"} "Password")
-       (d/input
-        {:type "password"
-         :id "password"
-         :class-name "border border-gray-300 rounded-md p-2"
-         :placeholder "Password"
-         :name (.-name register-password)
-         :on-blur (.-onBlur register-password)
-         :on-change (.-onChange register-password)
-         :ref (.-ref register-password)})
-       (when (.-password errors)
-         (d/span {:class-name "text-red-500"} "This field is required")))
-      (map-indexed (fn [index error]
-                     (d/div {:class-name "text-red-500" :key index} error)) api-errors)
-      (d/button
-       {:type "submit"
-        :class-name "bg-blue-500 text-white rounded-md p-2"}
-       "Sign In")))))
+    (d/form
+     {:on-submit (handleSubmit on-submit)}
+
+     ($ FormControl {:width "300px"}
+        ($ FormLabel "Email")
+        ($ Input {:type "email"
+                  :name (.-name register-email)
+                  :onBlur (.-onBlur register-email)
+                  :onChange (.-onChange register-email)
+                  :ref (.-ref register-email)})
+        (when (.-email errors)
+          ($ FormErrorMessage "This field is required."))
+
+        ($ FormLabel "Password")
+        ($ Input {:type "password"
+                  :name (.-name register-password)
+                  :onBlur (.-onBlur register-password)
+                  :onChange (.-onChange register-password)
+                  :ref (.-ref register-password)})
+        (when (.-password errors)
+          ($ FormErrorMessage "This field is required."))
+
+        (map-indexed (fn [index error]
+                       ($ FormErrorMessage {:key index} error))
+                     api-errors)
+        ($ Button {:mt 4
+                   :colorScheme "teal"
+                   :isLoading is-submitting
+                   :type "submit"}
+           "Sign In")))))

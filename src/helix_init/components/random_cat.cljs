@@ -1,6 +1,6 @@
 (ns helix-init.components.random-cat
-  (:require [helix.core :refer [defnc]]
-            [helix.dom :as d]
+  (:require [helix.core :refer [defnc $]]
+            ["@chakra-ui/react" :refer [AspectRatio Image Spinner]]
             ["axios$default" :as axios]
             ["jotai" :as jotai]
             ["jotai/utils" :as jotai-utils]))
@@ -21,5 +21,6 @@
                           ((fn [path]
                              (str "https://cataas.com" path))))]
     (if image-url
-      (d/img {:src image-url :alt "cat"})
-      (d/div "Loading..."))))
+      ($ AspectRatio {:maxW "400px" :ratio (/ 4 3)}
+         ($ Image {:src image-url :alt "cat" :objectFit "cover"}))
+      ($ Spinner))))
